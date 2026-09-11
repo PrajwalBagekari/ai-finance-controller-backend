@@ -7,7 +7,8 @@ from app.database.session import engine
 from app.api.v1.auth import router as auth_router
 # Import models
 from app.models.user import User
-
+from app.models.company import Company
+from app.api.v1.companies import router as companies_router
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -16,6 +17,8 @@ app = FastAPI(
 )
 
 app.include_router(auth_router)
+app.include_router(companies_router)
+
 @app.get("/")
 def root():
     return {"message": "AI Finance Controller Backend Running"}
